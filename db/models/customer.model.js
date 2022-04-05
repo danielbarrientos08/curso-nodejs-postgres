@@ -43,7 +43,6 @@ const CustomerSchema = {
     },
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
-
   }
 }
 

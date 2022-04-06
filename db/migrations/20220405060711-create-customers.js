@@ -1,9 +1,49 @@
 'use strict';
-const { CustomerSchema, CUSTOMER_TABLE} =require('./../models/customer.model')
+const { CUSTOMER_TABLE} =require('./../models/customer.model')
+const {DataTypes,Sequelize} =require('sequelize')
+const { USER_TABLE } = require('./user.model')
 
 module.exports = {
   async up (queryInterface) {
-    await queryInterface.createTable(CUSTOMER_TABLE, CustomerSchema)
+    await queryInterface.createTable(CUSTOMER_TABLE, {
+
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER
+      },
+      name: {
+        allowNull: false,
+        type: DataTypes.STRING
+      },
+      lastName: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        field: 'last_name'
+      },
+      phone: {
+        allowNull: true,
+        type: DataTypes.STRING
+      },
+      createdAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+        field: 'created_at',
+        defaultValue: Sequelize.NOW
+      },
+      userId: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        field: 'user_id',
+        references: {
+          model: USER_TABLE,
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
+      }
+    })
   },
 
   async down (queryInterface) {

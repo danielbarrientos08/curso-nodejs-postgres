@@ -1,7 +1,7 @@
 'use strict';
 const { CUSTOMER_TABLE} =require('./../models/customer.model')
 const {DataTypes,Sequelize} =require('sequelize')
-const { USER_TABLE } = require('./user.model')
+const { USER_TABLE } = require('./../models/user.model')
 
 module.exports = {
   async up (queryInterface) {
